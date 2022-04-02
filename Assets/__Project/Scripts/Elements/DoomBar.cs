@@ -1,8 +1,18 @@
 using UnityEngine;
 using TMPro;
 
-public class DoomBar : MonoBehaviour, IOnTickHandler
+public class DoomBar : MonoBehaviour
 {
+    static DoomBar _instance;
+    public static DoomBar Instance
+    {
+        get
+        {
+            if (_instance == null) _instance = FindObjectOfType<DoomBar>();
+            return _instance;
+        }
+    }
+
     public RectTransform ProgressBar;
     public TMP_Text Text_Remaining;
 
@@ -10,13 +20,12 @@ public class DoomBar : MonoBehaviour, IOnTickHandler
 
     private void Start()
     {
-        GameManager.Instance.Register(this);
         _startWidth = ProgressBar.sizeDelta.x;
     }
 
-    public void OnTick()
+    public void UpdateUI()
     {
         ProgressBar.sizeDelta = new Vector2(_startWidth * GameManager.Instance.GetDoomPercentage(), ProgressBar.sizeDelta.y);
-        Text_Remaining.text = GameManager.Instance.GetRemainingDays().ToString() + " remaining days";
+        Text_Remaining.text = Mathf.Max(0, GameManager.Instance.GetRemainingDays()).ToString() + " remaining days";
     }
 }

@@ -187,8 +187,8 @@ GameObject:
   m_Component:
   - component: {fileID: 490609132903849602}
   - component: {fileID: 490609132903849612}
-  - component: {fileID: 490609132903849603}
   - component: {fileID: 490609132903849613}
+  - component: {fileID: 490609132903849603}
   m_Layer: 0
   m_Name: JobView_1
   m_TagString: Untagged
@@ -262,23 +262,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &490609132903849603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490609132903849601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e82ff08972db309448c97536aa479e27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Job: {fileID: 11400000, guid: 7ddcf53ef190bf746847d773c95fff76, type: 2}
-  AssignedPersons: 0
-  Text_JobTitle: {fileID: 490609133352591852}
-  Text_Assigned: {fileID: 490609133805711366}
-  Panel_ProgressBar: {fileID: 490609132130028579}
 --- !u!65 &490609132903849613
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -292,6 +275,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &490609132903849603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490609132903849601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82ff08972db309448c97536aa479e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Job: {fileID: 11400000, guid: 7ddcf53ef190bf746847d773c95fff76, type: 2}
+  Text_JobTitle: {fileID: 490609133352591852}
+  Text_Assigned: {fileID: 490609133805711366}
+  Panel_ProgressBar: {fileID: 490609132130028579}
 --- !u!1 &490609133352591842
 GameObject:
   m_ObjectHideFlags: 0

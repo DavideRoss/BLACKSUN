@@ -13,10 +13,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool Playing { get => _playing; }
+
+    [Header("Settings")]
     public float TickPerSecond = 20f;
     public float TicksForDoom = 12000f;
     public float TicksPerDay = 40f;
 
+    [Header("UI")]
+    public GameObject Panel_GameOverUI;
+
+    bool _playing = true;
     float _time;
     long _ticks = 0;
 
@@ -24,14 +31,24 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        _time += Time.deltaTime;
-
-        if (_time > 1f / TickPerSecond)
+        if (_playing)
         {
-            _ticks++;
-            _time -= 1f/ TickPerSecond;
+            _time += Time.deltaTime;
+            if (_time > 1f / TickPerSecond)
+            {
+                _ticks++;
+                _time -= 1f/ TickPerSecond;
 
-            foreach (IOnTickHandler jv in _jobs.ToArray()) jv.OnTick();
+                foreach (IOnTickHandler jv in _jobs.ToArray()) jv.OnTick();
+                DoomBar.Instance.UpdateUI();
+
+                if (_ticks >= TicksForDoom)
+                {
+                    // TODO: gameover animation
+                    _playing = false;
+                    Panel_GameOverUI.SetActive(true);
+                }
+            }
         }
     }
 

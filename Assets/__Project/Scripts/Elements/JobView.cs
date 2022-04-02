@@ -5,27 +5,31 @@ using TMPro;
 public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler
 {
     public Job Job;
-    public int AssignedPersons = 0;
 
     [Header("UI")]
     public TMP_Text Text_JobTitle;
     public TMP_Text Text_Assigned;
     public RectTransform Panel_ProgressBar;
 
+    int _assignedPersons = 0;
     bool _started = false;
     float _jobAdvancement = 0f;
 
     private void Start()
     {
         GameManager.Instance.Register(this);
+    }
 
+    public void Initialize()
+    {
         Text_JobTitle.text = Job.Name;
         RefreshUI();
     }
 
+    // TODO: add minimum requirement for a job
     public void OnTick()
     {
-        if (!_started && AssignedPersons > 0 && ResourceManager.Instance.CheckRequirements(Job.Requirements))
+        if (!_started && _assignedPersons > 0 && ResourceManager.Instance.CheckRequirements(Job.Requirements))
         {
             ResourceManager.Instance.Remove(Job.Requirements);
             _started = true;
@@ -33,7 +37,7 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler
 
         if (!_started) return;
 
-        _jobAdvancement += AssignedPersons;
+        _jobAdvancement += _assignedPersons;
         if (_jobAdvancement > Job.TicksToComplete)
         {
             ResourceManager.Instance.Add(Job.Result);
@@ -46,15 +50,15 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler
 
     public void OnPointerClick(PointerEventData e)
     {
-        if (e.button == PointerEventData.InputButton.Left && ResourceManager.Instance.GetVillagers() > 0 && (Job.MaxPersons < 0 || AssignedPersons < Job.MaxPersons))
+        if (e.button == PointerEventData.InputButton.Left && ResourceManager.Instance.GetVillagers() > 0 && (Job.MaxPersons < 0 || _assignedPersons < Job.MaxPersons))
         {
-            AssignedPersons++;
+            _assignedPersons++;
             ResourceManager.Instance.Add(Resource.Villager, -1);
         }
 
-        if (e.button == PointerEventData.InputButton.Right && AssignedPersons > 0)
+        if (e.button == PointerEventData.InputButton.Right && _assignedPersons > 0)
         {
-            AssignedPersons--;
+            _assignedPersons--;
             ResourceManager.Instance.Add(Resource.Villager, 1);
         }
 
@@ -63,7 +67,7 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler
 
     public void RefreshUI()
     {
-        Text_Assigned.text = AssignedPersons.ToString();
+        Text_Assigned.text = _assignedPersons.ToString();
         if (Job.MaxPersons > -1) Text_Assigned.text += $" / {Job.MaxPersons}";
     }
     public void UpdateProgressBar()

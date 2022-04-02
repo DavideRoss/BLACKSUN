@@ -10,14 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 088af08f37225a94eb47b83a028ca828, type: 3}
-  m_Name: Village
+  m_Name: Gatherer
   m_EditorClassIdentifier: 
-  Name: Village
-  Requirements:
-  - Resource: 2
-    Count: 10
+  Name: Gather
+  Requirements: []
   Result:
-  - Resource: 0
-    Count: 1
-  MaxPersons: 3
-  TicksToComplete: 3000
+  - Resource: 3
+    Count: 2
+  MaxPersons: -1
+  TicksToComplete: 60

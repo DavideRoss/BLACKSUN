@@ -39,6 +39,12 @@ public class ResourceManager : MonoBehaviour
     #endregion
 
     public List<ResourceCount> Count;
+    public ResourceDefinitionList Definitions;
+
+    private void Start()
+    {
+        ResourcesUI.Instance.RefreshUI();
+    }
 
     public bool CheckRequirements(List<ResourceCount> req)
     {
@@ -70,6 +76,8 @@ public class ResourceManager : MonoBehaviour
         int i = Count.FindIndex(e => e.Resource == res);
         if (i > -1) Count[i].Count += count;
         else Count.Add(new ResourceCount(res, count));
+
+        ResourcesUI.Instance.RefreshUI();
     }
 
     public void Add(List<ResourceCount> result)

@@ -4,7 +4,16 @@ public enum ResourceType { Blood, Nourishment, Opulence }
 
 public enum Resource
 {
+    // Blood
     Villager,
+    Goat,
+    Snake,
+
+    // Nourishment
     Seeds,
-    Corn
+    Corn,
+    Meat,
+
+    // Opulence
+    GoldNugget
 }

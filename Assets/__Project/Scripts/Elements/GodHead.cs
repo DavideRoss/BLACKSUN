@@ -4,12 +4,13 @@ using TMPro;
 
 public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler
 {
-    public ResourceType Type;
     public ResourceCount Demands;
     public float TotalTicks;
 
     public float BonusTicks;
     public float MalusTicks;
+
+    // TODO: add camera shake when the head hit the altar (or another head) for the first time
 
     [Header("UI")]
     public TMP_Text Text_Demands;
@@ -18,9 +19,17 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler
     int _currentCount;
     float _pastTicks;
 
+    Rigidbody2D _rb;
+    bool _shaken = false;
+
     private void Start()
     {
         GameManager.Instance.Register(this);
+    }
+
+    public void Initialize()
+    {
+        RefreshUI();
     }
 
     public void OnTick()
@@ -29,10 +38,7 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler
 
         if (_pastTicks >= TotalTicks) DestroyHead(-MalusTicks);
         
-        Text_Demands.text = $"{Demands.Resource.ToString()}\n{_currentCount} / {Demands.Count}";
-
-        float progress = Mathf.Min(1f, _pastTicks / TotalTicks);
-        Panel_ProgressBar.sizeDelta = new Vector2(progress, Panel_ProgressBar.sizeDelta.y);
+        RefreshUI();
     }
 
     public void OnPointerClick(PointerEventData e)
@@ -52,10 +58,27 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler
     private void DestroyHead(float ticksToAdd)
     {
         // TODO: animate
-        // TODO: spawn a new head
-        
         GameManager.Instance.AddTicksToDoom(ticksToAdd);
+        AltarManager.Instance.AskForNewHead();
+        
         GameManager.Instance.Unregister(this);
         Destroy(this.gameObject);
+    }
+    
+    private void RefreshUI()
+    {
+        Text_Demands.text = $"{Demands.Resource.ToString()}\n{_currentCount} / {Demands.Count}";
+
+        float progress = Mathf.Min(1f, _pastTicks / TotalTicks);
+        Panel_ProgressBar.sizeDelta = new Vector2(progress, Panel_ProgressBar.sizeDelta.y);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!_shaken)
+        {
+            _shaken = true;
+            ShakeManager.Instance.Shake();
+        }
     }
 }

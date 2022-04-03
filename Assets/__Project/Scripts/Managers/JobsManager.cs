@@ -14,11 +14,11 @@ public class JobsManager : MonoBehaviour
         }
     }
 
-    [Header("Grid Settings")]
-    public int CellsPerRow = 5;
-    public int Rows = 3;
-    public float HorizontalOffset = 2f;
-    public float VerticalOffset = 2f;
+    // [Header("Grid Settings")]
+    // public int CellsPerRow = 5;
+    // public int Rows = 3;
+    // public float HorizontalOffset = 2f;
+    // public float VerticalOffset = 2f;
 
     [Header("References")]
     public List<Job> Jobs;
@@ -36,22 +36,22 @@ public class JobsManager : MonoBehaviour
         foreach (Job j in StartingJobs) SpawnJob(j);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = Color.red;
 
-        for (int y = 0; y < Rows; y++)
-        {
-            for (int x = 0; x < CellsPerRow; x++)
-            {
-                Gizmos.DrawWireSphere(transform.position + new Vector3(x * HorizontalOffset, y * -VerticalOffset, 0f), .25f);
-            }
-        }
-    }
+    //     for (int y = 0; y < Rows; y++)
+    //     {
+    //         for (int x = 0; x < CellsPerRow; x++)
+    //         {
+    //             Gizmos.DrawWireSphere(transform.position + new Vector3(x * HorizontalOffset, y * -VerticalOffset, 0f), .25f);
+    //         }
+    //     }
+    // }
 
     public void SpawnJob(Job j)
     {
-        JobView jv = Instantiate(JobViewPrefab, GetPositionAndIncrement(), Quaternion.identity, transform);
+        JobView jv = Instantiate(JobViewPrefab, Vector3.zero, Quaternion.identity, transform);
         jv.Job = j;
         jv.Initialize();
         
@@ -60,22 +60,22 @@ public class JobsManager : MonoBehaviour
 
     public void UnlockResearch()
     {
-        Instantiate(ResearchViewPrefab, GetPositionAndIncrement(), Quaternion.identity, transform);
+        Instantiate(ResearchViewPrefab, Vector3.zero, Quaternion.identity, transform);
     }
 
-    private Vector3 GetPositionAndIncrement()
-    {
-        Vector3 res = new Vector3(_nextCell.x * HorizontalOffset, _nextCell.y * -VerticalOffset, 0f) + transform.position;
+    // private Vector3 GetPositionAndIncrement()
+    // {
+    //     Vector3 res = new Vector3(_nextCell.x * HorizontalOffset, _nextCell.y * -VerticalOffset, 0f) + transform.position;
 
-        _nextCell.x++;
-        if (_nextCell.x >= CellsPerRow)
-        {
-            _nextCell.x = 0;
-            _nextCell.y++;
-        }
+    //     _nextCell.x++;
+    //     if (_nextCell.x >= CellsPerRow)
+    //     {
+    //         _nextCell.x = 0;
+    //         _nextCell.y++;
+    //     }
 
-        return res;
-    }
+    //     return res;
+    // }
 
     public void UnlockNewJob()
     {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 using TMPro;
 using DG.Tweening;
@@ -10,7 +11,8 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler
     public Job Job;
 
     [Header("UI")]
-    public SpriteRenderer SpriteBorder;
+    public Image SpriteBorder;
+    // public SpriteRenderer SpriteBorder;
     public TMP_Text Text_JobTitle;
     public TMP_Text Text_Assigned;
     public RectTransform Panel_ProgressBar;

@@ -19,7 +19,8 @@ public class ResourceLine : MonoBehaviour
 
     public void UpdateText()
     {
-        Text.text = $"{_def.Name}: {_count}";
+        // Text.text = $"{_def.Name}: {_count}";
+        Text.text = _count.ToString();
     }
 
     public void UpdateText(int count)

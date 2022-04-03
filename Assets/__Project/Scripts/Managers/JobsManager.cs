@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class JobsManager : MonoBehaviour
@@ -21,7 +22,9 @@ public class JobsManager : MonoBehaviour
 
     [Header("References")]
     public List<Job> Jobs;
+
     public JobView JobViewPrefab;
+    public ResearchView ResearchViewPrefab;
 
     [Header("Starting Settings")]
     public List<Job> StartingJobs;
@@ -48,9 +51,21 @@ public class JobsManager : MonoBehaviour
 
     public void SpawnJob(Job j)
     {
-        JobView jv = Instantiate(JobViewPrefab, new Vector3(_nextCell.x * HorizontalOffset, _nextCell.y * -VerticalOffset, 0f) + transform.position, Quaternion.identity, transform);
+        JobView jv = Instantiate(JobViewPrefab, GetPositionAndIncrement(), Quaternion.identity, transform);
         jv.Job = j;
         jv.Initialize();
+        
+        MarkJobAsUnlocked(j);
+    }
+
+    public void UnlockResearch()
+    {
+        Instantiate(ResearchViewPrefab, GetPositionAndIncrement(), Quaternion.identity, transform);
+    }
+
+    private Vector3 GetPositionAndIncrement()
+    {
+        Vector3 res = new Vector3(_nextCell.x * HorizontalOffset, _nextCell.y * -VerticalOffset, 0f) + transform.position;
 
         _nextCell.x++;
         if (_nextCell.x >= CellsPerRow)
@@ -58,5 +73,19 @@ public class JobsManager : MonoBehaviour
             _nextCell.x = 0;
             _nextCell.y++;
         }
+
+        return res;
+    }
+
+    public void UnlockNewJob()
+    {
+        List<Job> avail = Jobs.Where(e => !e.Unlocked).OrderBy(e => e.Level).ToList();
+        Debug.Log(avail.Count());
+    }
+
+    private void MarkJobAsUnlocked(Job j)
+    {
+        int i = Jobs.FindIndex(e => e == j);
+        Jobs[i].Unlocked = true;
     }
 }

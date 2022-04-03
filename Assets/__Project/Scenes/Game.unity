@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 265, y: -47.5}
-  m_SizeDelta: {x: -570.00006, y: -135}
+  m_AnchoredPosition: {x: 0, y: -47.5}
+  m_SizeDelta: {x: -40, y: -135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &87772881
 MonoBehaviour:
@@ -337,8 +337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -375,10 +375,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 20
-    m_Right: 20
-    m_Top: 20
-    m_Bottom: 20
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
@@ -1169,11 +1169,11 @@ RectTransform:
   m_Father: {fileID: 529139391}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1700, y: 50}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1120546965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,8 +1259,14 @@ MonoBehaviour:
   Rows: 5
   HorizontalOffset: 1.25
   VerticalOffset: 1.25
-  Jobs: []
-  JobViewPrefab: {fileID: 490609132903849603, guid: 9d805ec76ba27434b87ab97499d35f4c, type: 3}
+  Jobs:
+  - {fileID: 11400000, guid: d553c450b0ebca340b322df80f2bc4ca, type: 2}
+  - {fileID: 11400000, guid: 78b561f8f19844e409c4a73df1759368, type: 2}
+  - {fileID: 11400000, guid: 60f3c830f225bf3499c9bcdf6a2e7024, type: 2}
+  - {fileID: 11400000, guid: 279d970fca59fa94cb69943a734d07cf, type: 2}
+  - {fileID: 11400000, guid: 7ddcf53ef190bf746847d773c95fff76, type: 2}
+  JobViewPrefab: {fileID: 2738907753609393005, guid: 0ec2a7bdfa81f9d4ca5be6ae9e9a5362, type: 3}
+  ResearchViewPrefab: {fileID: 417408876, guid: 621c14e5aa9cbb7429cc0ec010aecf7d, type: 3}
   StartingJobs:
   - {fileID: 11400000, guid: 7ddcf53ef190bf746847d773c95fff76, type: 2}
   - {fileID: 11400000, guid: d553c450b0ebca340b322df80f2bc4ca, type: 2}
@@ -1332,7 +1338,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 2
+  m_PixelsPerUnitMultiplier: 4
 --- !u!222 &1260562296
 CanvasRenderer:
   m_ObjectHideFlags: 0

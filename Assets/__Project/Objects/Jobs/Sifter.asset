@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Sifter
   m_EditorClassIdentifier: 
   Name: Sifter
+  Level: 0
   Requirements:
   - Resource: 3
     Count: 2
@@ -21,3 +22,4 @@ MonoBehaviour:
     Count: 1
   MaxPersons: -1
   TicksToComplete: 120
+  Unlocked: 0

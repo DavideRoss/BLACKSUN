@@ -17,4 +17,5 @@ public struct ResourceDefinition
     public Resource Resource;
     public Sprite Sprite;
     public string Name;
+    public int Level;
 }

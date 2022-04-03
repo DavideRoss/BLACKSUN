@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Gatherer
   m_EditorClassIdentifier: 
   Name: Gatherer
+  Level: 0
   Requirements: []
   Result:
   - Resource: 3
     Count: 2
   MaxPersons: -1
   TicksToComplete: 60
+  Unlocked: 0

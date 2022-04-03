@@ -14,7 +14,6 @@ public class ResearchView : MonoBehaviour
 
     private void HandleResearchDone()
     {
-        // TODO: handle unlocking new jobs
-        Debug.Log("Handle research");
+        JobsManager.Instance.UnlockNewJob();
     }
 }

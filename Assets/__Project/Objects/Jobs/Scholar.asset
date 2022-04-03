@@ -17,5 +17,5 @@ MonoBehaviour:
   Requirements: []
   Result: []
   MaxPersons: -1
-  TicksToComplete: 400
-  Unlocked: 1
+  TicksToComplete: 2000
+  Unlocked: 0

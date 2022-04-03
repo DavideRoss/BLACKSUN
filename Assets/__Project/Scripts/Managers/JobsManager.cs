@@ -14,40 +14,24 @@ public class JobsManager : MonoBehaviour
         }
     }
 
-    // [Header("Grid Settings")]
-    // public int CellsPerRow = 5;
-    // public int Rows = 3;
-    // public float HorizontalOffset = 2f;
-    // public float VerticalOffset = 2f;
+    [Header("Globals")]
+    public int MaxLevel = 4;
 
     [Header("References")]
     public List<Job> Jobs;
-
     public JobView JobViewPrefab;
     public ResearchView ResearchViewPrefab;
 
     [Header("Starting Settings")]
     public List<Job> StartingJobs;
 
-    Vector2Int _nextCell = new Vector2Int(0, 0);
+    bool _researchUnlocked = false;
 
     private void Start()
     {
+        foreach (Job j in Jobs) j.Unlocked = false;
         foreach (Job j in StartingJobs) SpawnJob(j);
     }
-
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.red;
-
-    //     for (int y = 0; y < Rows; y++)
-    //     {
-    //         for (int x = 0; x < CellsPerRow; x++)
-    //         {
-    //             Gizmos.DrawWireSphere(transform.position + new Vector3(x * HorizontalOffset, y * -VerticalOffset, 0f), .25f);
-    //         }
-    //     }
-    // }
 
     public void SpawnJob(Job j)
     {
@@ -60,32 +44,26 @@ public class JobsManager : MonoBehaviour
 
     public void UnlockResearch()
     {
+        if (_researchUnlocked) return;
+        _researchUnlocked = true;
+        
         Instantiate(ResearchViewPrefab, Vector3.zero, Quaternion.identity, transform);
     }
-
-    // private Vector3 GetPositionAndIncrement()
-    // {
-    //     Vector3 res = new Vector3(_nextCell.x * HorizontalOffset, _nextCell.y * -VerticalOffset, 0f) + transform.position;
-
-    //     _nextCell.x++;
-    //     if (_nextCell.x >= CellsPerRow)
-    //     {
-    //         _nextCell.x = 0;
-    //         _nextCell.y++;
-    //     }
-
-    //     return res;
-    // }
 
     public void UnlockNewJob()
     {
         List<Job> avail = Jobs.Where(e => !e.Unlocked).OrderBy(e => e.Level).ToList();
-        Debug.Log(avail.Count());
+        if (avail.Count > 0) SpawnJob(avail[0]);
     }
 
     private void MarkJobAsUnlocked(Job j)
     {
         int i = Jobs.FindIndex(e => e == j);
         Jobs[i].Unlocked = true;
+    }
+
+    public int GetHighestLevel()
+    {
+        return Jobs.Where(e => e.Unlocked).Max(e => e.Level);
     }
 }

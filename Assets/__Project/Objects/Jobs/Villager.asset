@@ -22,4 +22,4 @@ MonoBehaviour:
     Count: 1
   MaxPersons: 3
   TicksToComplete: 3000
-  Unlocked: 1
+  Unlocked: 0

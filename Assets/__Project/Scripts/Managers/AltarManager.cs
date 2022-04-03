@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AltarManager : MonoBehaviour
@@ -43,8 +44,16 @@ public class AltarManager : MonoBehaviour
     {
         if (!GameManager.Instance.Playing) return;
 
-        // TODO: change parameters to spawn
-        Instantiate(GodHeadPrefab, SpawnPoint.position, Quaternion.identity, transform);
+        int count = Mathf.RoundToInt(Random.Range(1, 3) * GameManager.Instance.Difficulty * (Random.value < .5f ? 3 : 5));
+
+        var defs = ResourceManager.Instance.Definitions.Definitions;
+        int maxLevel = JobsManager.Instance.GetHighestLevel();
+        int resLevel = maxLevel;
+        if (maxLevel < JobsManager.Instance.MaxLevel) resLevel = Random.value < .25f ? maxLevel + 1 : maxLevel;
+
+        Resource res = defs.Where(e => e.Level == resLevel).PickRandom().Resource;
+
+        SpawnHead(new ResourceCount(res, count));
     }
 
     public void SpawnHead(ResourceCount demand)
@@ -58,7 +67,6 @@ public class AltarManager : MonoBehaviour
 
     public void AskForNewHead(float interval = 3f)
     {
-        // TODO: change fixed spawn time
         this.Invoke(SpawnHead, interval);
     }
 }

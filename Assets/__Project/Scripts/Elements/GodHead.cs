@@ -92,13 +92,16 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler, IPoi
         int available = ResourceManager.Instance.GetQuantity(Demands.Resource);
         if (available == 0) return;
 
-        int qtyToAsk = Mathf.Min(Demands.Count - _currentCount, available);
-        ResourceManager.Instance.Add(Demands.Resource, -qtyToAsk);
-        _currentCount += qtyToAsk;
+        if (Demands.Count <= available)
+        {
+            ResourceManager.Instance.Add(Demands.Resource, -Demands.Count);
+            Tooltip.Instance.Hide();
 
-        if (_currentCount == Demands.Count) DestroyHead(BonusTicks);
+            JobsManager.Instance.UnlockResearch();
+
+            DestroyHead(BonusTicks);
+        }
     }
-
 
     public void OnPointerEnter(PointerEventData eventData)
     {

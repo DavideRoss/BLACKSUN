@@ -2034,7 +2034,7 @@ GameObject:
   - component: {fileID: 606365082}
   - component: {fileID: 606365081}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: ScrollView_Jobs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2632,6 +2632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6960dff7bd0ade4eb6d72af669c29a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Difficulty: 1
   TickPerSecond: 20
   TicksForDoom: 12000
   TicksPerDay: 40
@@ -2858,7 +2859,7 @@ GameObject:
   - component: {fileID: 957150818}
   - component: {fileID: 957150819}
   m_Layer: 5
-  m_Name: Content
+  m_Name: Panel_JobsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2936,10 +2937,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Jobs:
+  - {fileID: 11400000, guid: d230f2020e2e9fc44bd59c9294df830a, type: 2}
+  - {fileID: 11400000, guid: 5b54909fea3dc5f478b451327d64a357, type: 2}
+  - {fileID: 11400000, guid: f202850fcb2b2f244a8d2c8911ead20c, type: 2}
+  - {fileID: 11400000, guid: fef46fbc852f27b4cba4a4b1d0f53d69, type: 2}
+  - {fileID: 11400000, guid: a513dbc0d97fe6b449d5b95ea32057ae, type: 2}
   - {fileID: 11400000, guid: d553c450b0ebca340b322df80f2bc4ca, type: 2}
+  - {fileID: 11400000, guid: 61ac9beae298cd141818b3e735473089, type: 2}
+  - {fileID: 11400000, guid: fa610b5d0e78a564bbde927966060397, type: 2}
+  - {fileID: 11400000, guid: 1d8cb03b030ef354eac4910b3f7ceb6e, type: 2}
+  - {fileID: 11400000, guid: 902a29ffe83874a49b2835e5c5a06c43, type: 2}
+  - {fileID: 11400000, guid: c6c34068734a86544a1e98e64af7ca50, type: 2}
+  - {fileID: 11400000, guid: 899fee04aa2f4214d86ce499aa349f55, type: 2}
   - {fileID: 11400000, guid: 78b561f8f19844e409c4a73df1759368, type: 2}
+  - {fileID: 11400000, guid: 52d96b3f5367c72478fb76c333942971, type: 2}
   - {fileID: 11400000, guid: 60f3c830f225bf3499c9bcdf6a2e7024, type: 2}
   - {fileID: 11400000, guid: 279d970fca59fa94cb69943a734d07cf, type: 2}
+  - {fileID: 11400000, guid: 4f1db49b6503b6845b9f11a518f8e44a, type: 2}
   - {fileID: 11400000, guid: 7ddcf53ef190bf746847d773c95fff76, type: 2}
   JobViewPrefab: {fileID: 1282806715053287871, guid: 4544372be0aa4c84684fe1d37b9f6877, type: 3}
   ResearchViewPrefab: {fileID: 2202996133237161378, guid: 03566b646dc2481479549b5399304600, type: 3}

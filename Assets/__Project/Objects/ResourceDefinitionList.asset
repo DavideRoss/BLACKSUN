@@ -16,21 +16,68 @@ MonoBehaviour:
   - Resource: 0
     Sprite: {fileID: -6400913422314380486, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
     Name: Villager
+    Level: 3
   - Resource: 1
     Sprite: {fileID: 2107215887564933441, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
     Name: Goat
+    Level: 0
   - Resource: 2
     Sprite: {fileID: -2190828563271380868, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
     Name: Snake
+    Level: 2
   - Resource: 3
     Sprite: {fileID: 7871495015514009198, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
     Name: Seeds
+    Level: 0
   - Resource: 4
     Sprite: {fileID: -6291728694041167770, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
     Name: Corn
+    Level: 1
   - Resource: 5
     Sprite: {fileID: 1848216903799394968, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
     Name: Meat
+    Level: 1
   - Resource: 6
     Sprite: {fileID: 522416265914234524, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
     Name: Golden Nugget
+    Level: 0
+  - Resource: 7
+    Sprite: {fileID: 1414478694623257066, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Stone
+    Level: 1
+  - Resource: 8
+    Sprite: {fileID: -8439866776918605826, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Effigy
+    Level: 2
+  - Resource: 9
+    Sprite: {fileID: 5861370308471173288, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Flour
+    Level: 2
+  - Resource: 10
+    Sprite: {fileID: 4557551196534018064, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Turquoise
+    Level: 3
+  - Resource: 11
+    Sprite: {fileID: -4446887906909828161, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Bread
+    Level: 3
+  - Resource: 12
+    Sprite: {fileID: 8155883353306805422, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Arrow
+    Level: 3
+  - Resource: 13
+    Sprite: {fileID: -5993602111400816823, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Jaguar
+    Level: 4
+  - Resource: 14
+    Sprite: {fileID: -8061387028894466533, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Jewels
+    Level: 4
+  - Resource: 15
+    Sprite: {fileID: -7492631798337001738, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Idol
+    Level: 4
+  - Resource: 16
+    Sprite: {fileID: 4226853108376789746, guid: 54cba0539bdfe8a4daa718a5e4d47b4d, type: 3}
+    Name: Feast
+    Level: 4

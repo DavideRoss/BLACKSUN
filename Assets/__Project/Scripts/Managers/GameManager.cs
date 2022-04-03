@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     public bool Playing { get => _playing; }
 
+    public float Difficulty = 1f;
+
     [Header("Settings")]
     public float TickPerSecond = 20f;
     public float TicksForDoom = 12000f;
@@ -38,6 +40,8 @@ public class GameManager : MonoBehaviour
             {
                 _ticks++;
                 _time -= 1f/ TickPerSecond;
+
+                Difficulty += .0001f;
 
                 foreach (IOnTickHandler jv in _jobs.ToArray()) jv.OnTick();
                 DoomBar.Instance.UpdateUI();

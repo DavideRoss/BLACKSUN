@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 using TMPro;
 
-public class ResourceLine : MonoBehaviour
+public class ResourceLine : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image Sprite;
     public TMP_Text Text;
@@ -27,5 +29,15 @@ public class ResourceLine : MonoBehaviour
     {
         _count = count;
         UpdateText();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Tooltip.Instance.ShowResource(_def);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Tooltip.Instance.Hide();
     }
 }

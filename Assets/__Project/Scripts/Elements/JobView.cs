@@ -6,13 +6,12 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler
+public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Job Job;
 
     [Header("UI")]
     public Image SpriteBorder;
-    // public SpriteRenderer SpriteBorder;
     public TMP_Text Text_JobTitle;
     public TMP_Text Text_Assigned;
     public RectTransform Panel_ProgressBar;
@@ -99,5 +98,15 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler
     {
         _errorState = !_errorState;
         SpriteBorder.DOColor(_errorState ? Color.red : Color.white, .125f);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Tooltip.Instance.ShowJob(Job);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Tooltip.Instance.Hide();
     }
 }

@@ -1,20 +1,40 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler
+public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    #region Strings
+
+    public static List<string> Names = new List<string>() {
+        "Macuilcozcacuauhtli", "Macuilcuetzpalin", "Macuilmalinalli", "Macuiltochtli", "Macuilxochitl", "Cuahuitlicac", "Patecatl", "Ixtlilton", "Ometochtli", "Tezcatzoncatl", "Tlilhua",
+        "Toltecatl", "Tepoztecatl", "Texcatzonatl", "Colhuatzincatl", "Macuiltochtli", "Iztacuhca", "Tlatlauhca", "Cozauhca", "Yayauhca", "Cipactonal", "Huehuecoyotl", "Huehueteotl",
+        "Mictlanpachecatl", "Cihuatecayotl", "Tlalocayotl", "Huitztlampaehecatl", "Quetzalcoatl", "Xiuhtecuhtli", "Mictlantecuhtli", "Acolmiztli", "Techlotl", "Nextepeua", "Iixpuzteque", "Tzontemoc",
+        "Xolotl", "Cuaxolotl", "Tloque-Nahuaque", "Ometeotl", "Ometecuhtli", "Tonacatecuhtli", "Piltzintecuhtli", "Citlalatonac", "Tonatiuh", "Nanauatzin", "Tecciztecatl", "Tlahuizcalpantecuhtli",
+        "Xolotl", "Xocotl", "Tezcatlipoca", "Quetzalcoatl", "Xipe-Totec", "Huitzilopochtli", "Painal", "Tlacahuepan", "Tepeyollotl", "Itzcaque",
+        "Chalchiutotolin", "Ixquitecatl", "Itztlacoliuhqui", "Macuiltotec", "Itztli", "Amapan", "Uappatzin", "Itzpapalotltotec", "Miquiztlitecuhtli", "Tlaloc", "Tlaloque", "Chalchiuhtlatonal",
+        "Atlaua", "Opochtli", "Teoyaomiqui", "Tlaltecayoa", "Cipactli", "Itztapaltotec", "Cinteotl", "Ppillimtec", "Omacatl", "Chicomexochtli",
+        "Chiconahuiehecatl", "Coyotlinahual", "Xoaltecuhtli", "Xippilli", "Xochipilli"
+    };
+
+    public static List<string> Domains = new List<string>() {
+        "stars", "medicine", "fertility", "underworld", "ballgame", "sacrifice", "earth", "art", "excess", "pleasure", "gluttony", "music", "gambling",
+        "healing", "peyote", "maize", "astrology", "old-age", "deception", "wisdom", "winds", "light", "fire"
+    };
+    
+    #endregion
+
     public ResourceCount Demands;
     public float TotalTicks;
 
     public float BonusTicks;
     public float MalusTicks;
 
-    // TODO: add camera shake when the head hit the altar (or another head) for the first time
+    public SpriteRenderer Head;
 
-    [Header("UI")]
-    public TMP_Text Text_Demands;
-    public RectTransform Panel_ProgressBar;
+    [HideInInspector] public string Name;
+    [HideInInspector] public string Domain;
 
     int _currentCount;
     float _pastTicks;
@@ -27,9 +47,14 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler
         GameManager.Instance.Register(this);
     }
 
-    public void Initialize()
+    public void Initialize(Sprite headSprite, Color col)
     {
-        RefreshUI();
+        Head.sprite = headSprite;
+        Head.color = col;
+
+        Name = GodHead.Names.PickRandom();
+        Domain = Random.value < .5f ? "Goddess of " : "God of ";
+        Domain += GodHead.Domains.PickRandom();
     }
 
     public void OnTick()
@@ -37,8 +62,27 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler
         _pastTicks++;
 
         if (_pastTicks >= TotalTicks) DestroyHead(-MalusTicks);
+
+        Head.material.SetFloat("_Timer", Mathf.Clamp01(1f - (_pastTicks / TotalTicks)));
+    }
+
+    private void DestroyHead(float ticksToAdd)
+    {
+        // TODO: animate
+        GameManager.Instance.AddTicksToDoom(ticksToAdd);
+        AltarManager.Instance.AskForNewHead();
         
-        RefreshUI();
+        GameManager.Instance.Unregister(this);
+        Destroy(this.gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!_shaken)
+        {
+            _shaken = true;
+            ShakeManager.Instance.Shake();
+        }
     }
 
     public void OnPointerClick(PointerEventData e)
@@ -55,30 +99,14 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler
         if (_currentCount == Demands.Count) DestroyHead(BonusTicks);
     }
 
-    private void DestroyHead(float ticksToAdd)
-    {
-        // TODO: animate
-        GameManager.Instance.AddTicksToDoom(ticksToAdd);
-        AltarManager.Instance.AskForNewHead();
-        
-        GameManager.Instance.Unregister(this);
-        Destroy(this.gameObject);
-    }
-    
-    private void RefreshUI()
-    {
-        Text_Demands.text = $"{Demands.Resource.ToString()}\n{_currentCount} / {Demands.Count}";
 
-        float progress = Mathf.Min(1f, _pastTicks / TotalTicks);
-        Panel_ProgressBar.sizeDelta = new Vector2(progress, Panel_ProgressBar.sizeDelta.y);
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Tooltip.Instance.ShowGod(this);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public void OnPointerExit(PointerEventData eventData)
     {
-        if (!_shaken)
-        {
-            _shaken = true;
-            ShakeManager.Instance.Shake();
-        }
+        Tooltip.Instance.Hide();
     }
 }

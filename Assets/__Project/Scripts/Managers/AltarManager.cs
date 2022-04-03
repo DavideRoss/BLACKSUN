@@ -13,7 +13,11 @@ public class AltarManager : MonoBehaviour
         }
     }
 
-    [Header("references")]
+    [Header("Generation")]
+    public List<Sprite> Sprites = new List<Sprite>();
+    public List<Color> Colors = new List<Color>();
+
+    [Header("References")]
     public Transform SpawnPoint;
     public GodHead GodHeadPrefab;
 
@@ -49,7 +53,7 @@ public class AltarManager : MonoBehaviour
 
         GodHead gh = Instantiate(GodHeadPrefab, SpawnPoint.position, Quaternion.identity, transform);
         gh.Demands = demand;
-        gh.Initialize();
+        gh.Initialize(Sprites.PickRandom(), Colors.PickRandom());
     }
 
     public void AskForNewHead(float interval = 3f)

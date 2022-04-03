@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 088af08f37225a94eb47b83a028ca828, type: 3}
-  m_Name: Villager
+  m_Name: Miner
   m_EditorClassIdentifier: 
-  Name: Villager
-  Level: 0
+  Name: Miner
+  Level: 1
   Requirements:
-  - Resource: 4
-    Count: 10
+  - Resource: 3
+    Count: 3
   Result:
-  - Resource: 0
+  - Resource: 6
     Count: 1
-  MaxPersons: 3
-  TicksToComplete: 3000
-  Unlocked: 1
+  - Resource: 7
+    Count: 2
+  MaxPersons: -1
+  TicksToComplete: 200
+  Unlocked: 0

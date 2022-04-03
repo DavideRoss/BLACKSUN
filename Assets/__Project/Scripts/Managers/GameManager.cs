@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using TMPro;
+
 public class GameManager : MonoBehaviour
 {
     static GameManager _instance;
@@ -24,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public GameObject Panel_GameOverUI;
+    public TMP_Text Text_Count;
 
     bool _playing = true;
     float _time;
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
                 {
                     // TODO: gameover animation
                     _playing = false;
+                    Text_Count.text = $"You survived for {Mathf.RoundToInt(_ticks / TicksPerDay)} days.";
                     Panel_GameOverUI.SetActive(true);
                 }
             }

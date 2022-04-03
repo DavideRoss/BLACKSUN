@@ -24,6 +24,8 @@ public class Tooltip : MonoBehaviour
     public TMP_Text JobTitle;
     public List<Image> InputSlots;
     public List<Image> OutputSlots;
+    public TMP_Text SpecialOutput;
+    public TMP_Text DaysLong;
 
     [Header("God")]
     public GameObject GodMain;
@@ -31,6 +33,7 @@ public class Tooltip : MonoBehaviour
     public TMP_Text GodDomain;
     public TMP_Text RequestCount;
     public Image RequestImage;
+    public TMP_Text DaysLeft;
 
     [Header("Resource")]
     public GameObject ResourceMain;
@@ -73,6 +76,7 @@ public class Tooltip : MonoBehaviour
         ResourceMain.SetActive(false);
 
         JobTitle.text = j.Name;
+        DaysLong.text = Mathf.FloorToInt(j.TicksToComplete / GameManager.Instance.TicksPerDay) + " days long";
 
         for (int i = 0; i < InputSlots.Count; i++)
         {
@@ -84,13 +88,24 @@ public class Tooltip : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < OutputSlots.Count; i++)
+        if (j.Result.Count == 0)
         {
-            if (i >= j.Result.Count) OutputSlots[i].gameObject.SetActive(false);
-            else
+            SpecialOutput.gameObject.SetActive(true);
+            foreach (var i in OutputSlots) i.gameObject.SetActive(false);
+
+            SpecialOutput.text = j.SpecialOutput;
+        }
+        else
+        {
+            SpecialOutput.gameObject.SetActive(false);
+            for (int i = 0; i < OutputSlots.Count; i++)
             {
-                OutputSlots[i].gameObject.SetActive(true);
-                OutputSlots[i].sprite = ResourceManager.Instance.Definitions.GetDefinition(j.Result[i].Resource).Sprite;
+                if (i >= j.Result.Count) OutputSlots[i].gameObject.SetActive(false);
+                else
+                {
+                    OutputSlots[i].gameObject.SetActive(true);
+                    OutputSlots[i].sprite = ResourceManager.Instance.Definitions.GetDefinition(j.Result[i].Resource).Sprite;
+                }
             }
         }
     }
@@ -116,6 +131,7 @@ public class Tooltip : MonoBehaviour
 
         GodName.text = head.Name;
         GodDomain.text = head.Domain;
+        DaysLeft.text = head.DaysLeft + " days left";
 
         RequestCount.text = head.Demands.Count.ToString();
         RequestImage.sprite = ResourceManager.Instance.Definitions.GetDefinition(head.Demands.Resource).Sprite;

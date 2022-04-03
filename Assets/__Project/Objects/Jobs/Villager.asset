@@ -16,10 +16,11 @@ MonoBehaviour:
   Level: 0
   Requirements:
   - Resource: 4
-    Count: 10
+    Count: 5
   Result:
   - Resource: 0
     Count: 1
-  MaxPersons: 3
-  TicksToComplete: 3000
-  Unlocked: 0
+  SpecialOutput: 
+  MaxPersons: -1
+  TicksToComplete: 1500
+  Unlocked: 1

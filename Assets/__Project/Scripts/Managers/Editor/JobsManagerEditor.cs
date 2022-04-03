@@ -10,7 +10,6 @@ public class JobsManagerEditor : Editor
         
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
 
-        if (GUILayout.Button("Unlock Research")) JobsManager.Instance.UnlockResearch();
         if (GUILayout.Button("Unlock New Job")) JobsManager.Instance.UnlockNewJob();
     }
 }

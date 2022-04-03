@@ -25,11 +25,9 @@ public class JobsManager : MonoBehaviour
     [Header("Starting Settings")]
     public List<Job> StartingJobs;
 
-    bool _researchUnlocked = false;
-
     private void Start()
     {
-        foreach (Job j in Jobs) j.Unlocked = false;
+        foreach (Job j in Jobs) j.Unlocked = j.Name == "Scholar";
         foreach (Job j in StartingJobs) SpawnJob(j);
     }
 
@@ -40,14 +38,6 @@ public class JobsManager : MonoBehaviour
         jv.Initialize();
         
         MarkJobAsUnlocked(j);
-    }
-
-    public void UnlockResearch()
-    {
-        if (_researchUnlocked) return;
-        _researchUnlocked = true;
-        
-        Instantiate(ResearchViewPrefab, Vector3.zero, Quaternion.identity, transform);
     }
 
     public void UnlockNewJob()

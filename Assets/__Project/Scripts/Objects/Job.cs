@@ -10,10 +10,10 @@ public class Job : ScriptableObject
 
     public List<ResourceCount> Requirements;
     public List<ResourceCount> Result;
+    public string SpecialOutput;
 
     public float MaxPersons = -1;
     public float TicksToComplete;
 
-    // TODO: add HideInInspector
-    public bool Unlocked = false;
+    [HideInInspector] public bool Unlocked = false;
 }

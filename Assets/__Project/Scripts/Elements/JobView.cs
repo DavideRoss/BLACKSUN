@@ -16,10 +16,14 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler, IPoi
     public TMP_Text Text_Assigned;
     public RectTransform Panel_ProgressBar;
 
+    [Header("Colors")]
+    public Color ColorWhenZero = Color.gray;
+
     int _assignedPersons = 0;
     float _jobAdvancement = 0f;
     bool _started = false;
     bool _errorState = false;
+    Color _startingColor;
 
     [HideInInspector]
     public UnityEvent OnJobDone;
@@ -32,10 +36,10 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler, IPoi
     public void Initialize()
     {
         Text_JobTitle.text = Job.Name;
+        _startingColor = SpriteBorder.color;
         RefreshUI();
     }
 
-    // TODO: add minimum requirement for a job
     public void OnTick()
     {
         if (!_started && _assignedPersons > 0)
@@ -88,6 +92,8 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler, IPoi
     {
         Text_Assigned.text = _assignedPersons.ToString();
         if (Job.MaxPersons > -1) Text_Assigned.text += $"/{Job.MaxPersons}";
+
+        Text_Assigned.color = _assignedPersons > 0 ? Color.white : ColorWhenZero;
     }
     public void UpdateProgressBar()
     {
@@ -97,7 +103,7 @@ public class JobView : MonoBehaviour, IPointerClickHandler, IOnTickHandler, IPoi
     private void ToggleErrorState()
     {
         _errorState = !_errorState;
-        SpriteBorder.DOColor(_errorState ? Color.red : Color.white, .125f);
+        SpriteBorder.DOColor(_errorState ? Color.red : _startingColor, .125f);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

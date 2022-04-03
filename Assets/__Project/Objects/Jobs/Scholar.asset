@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Scholar
   Level: 1
-  Requirements: []
+  Requirements:
+  - Resource: 6
+    Count: 3
   Result: []
+  SpecialOutput: New job
   MaxPersons: -1
-  TicksToComplete: 2000
-  Unlocked: 0
+  TicksToComplete: 1600
+  Unlocked: 1

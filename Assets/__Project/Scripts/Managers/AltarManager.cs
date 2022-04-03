@@ -69,4 +69,12 @@ public class AltarManager : MonoBehaviour
     {
         this.Invoke(SpawnHead, interval);
     }
+
+    public void ExplodeHeads(Vector2 position)
+    {
+        foreach (var rb in GetComponentsInChildren<Rigidbody2D>())
+        {
+            rb.AddForceAtPosition(new Vector2(-2f, .2f), position, ForceMode2D.Impulse);
+        }
+    }
 }

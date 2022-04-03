@@ -8,8 +8,19 @@ Shader "Unlit/GodHead_Shader"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
-        LOD 100
+        Tags
+		{ 
+			"Queue"="Transparent" 
+			"IgnoreProjector"="True" 
+			"RenderType"="Transparent" 
+			"PreviewType"="Plane"
+			"CanUseSpriteAtlas"="True"
+		}
+
+        Cull Off
+		Lighting Off
+		ZWrite Off
+		Blend One OneMinusSrcAlpha
 
         Pass
         {
@@ -52,8 +63,7 @@ Shader "Unlit/GodHead_Shader"
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv) * i.color;
-                clip(col.a -.5f);
-
+                
                 float4 alt = col * _Darken;
                 float blend = step(_Timer, i.uv.y);
 

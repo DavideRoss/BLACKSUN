@@ -42,9 +42,13 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler, IPoi
     Rigidbody2D _rb;
     bool _shaken = false;
 
+    public int DaysLeft { get => Mathf.FloorToInt((TotalTicks - _pastTicks) / GameManager.Instance.TicksPerDay); }
+
     private void Start()
     {
         GameManager.Instance.Register(this);
+
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     public void Initialize(Sprite headSprite, Color col)
@@ -68,12 +72,17 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler, IPoi
 
     private void DestroyHead(float ticksToAdd)
     {
-        // TODO: animate
+        _rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        AltarManager.Instance.ExplodeHeads(new Vector2(transform.position.x + 1f, transform.position.y));
+
         GameManager.Instance.AddTicksToDoom(ticksToAdd);
         AltarManager.Instance.AskForNewHead();
         
         GameManager.Instance.Unregister(this);
-        Destroy(this.gameObject);
+
+        this.Invoke(() => {
+            Destroy(this.gameObject);
+        }, 1f);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -96,8 +105,6 @@ public class GodHead : MonoBehaviour, IOnTickHandler, IPointerClickHandler, IPoi
         {
             ResourceManager.Instance.Add(Demands.Resource, -Demands.Count);
             Tooltip.Instance.Hide();
-
-            JobsManager.Instance.UnlockResearch();
 
             DestroyHead(BonusTicks);
         }
